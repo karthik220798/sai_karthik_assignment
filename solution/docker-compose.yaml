@@ -1,0 +1,11 @@
+version: '3.8'  # Specify the version of Docker Compose
+
+services:
+  csvserver:
+    image: infracloudio/csvserver:latest
+    ports:
+      - "9393:9300"  # Map host port 9393 to container port 9300
+    volumes:
+      - ./inputFile:/csvserver/inputdata  # Mount inputFile into the container
+    env_file:
+      - csvserver.env  # Load environment variables from csvserver.env
