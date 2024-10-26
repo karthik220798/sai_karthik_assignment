@@ -1,11 +1,25 @@
-version: '3.8'  # Specify the version of Docker Compose
+version: '3.8'
 
 services:
   csvserver:
     image: infracloudio/csvserver:latest
     ports:
-      - "9393:9300"  # Map host port 9393 to container port 9300
+      - "9393:9300"  # we need to map host port 9393 to container port 9300
     volumes:
-      - ./inputFile:/csvserver/inputdata  # Mount inputFile into the container
+      - ./inputFile:/csvserver/inputdata  # Mount inputfile into the container
     env_file:
       - csvserver.env  # Load environment variables from csvserver.env
+    networks:
+      - monitoring  # Use a specific network for communication with Prometheus
+
+  prometheus:
+    image: prom/prometheus:v2.45.2
+    ports:
+      - "9090:9090"  # Expose Prometheus on port 9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml  # Mount configuration file
+    networks:
+      - monitoring  # Use the same network for communication with csvserver
+
+networks:
+  monitoring:  # Define a custom network
