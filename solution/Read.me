@@ -1,0 +1,58 @@
+Steps need to be performed for part I Solutions :
+
+Created a New Repository named as sai_karthik_Assignmnet 
+
+In the Solution Directory 
+I have placed the inputfile script in file named gencsv.sh 
+We need to make sure the script is executable 
+chmod +x gencsv.sh
+To generate the inputFile with entries from index 2 to 8, run:
+./gencsv.sh 2 8
+
+The inputfile is generated the values 
+2, 321
+3, 128
+4, 561
+
+
+5, 822
+6, 891
+7, 148
+8, 753
+
+Solution for 4,5,6 Questions 
+
+Then Run the Container with the inputFile and Set Environment Variable
+
+docker run -d --name csvserver \
+    -p 9393:9300 \
+    -v "$(pwd)/inputFile:/csvserver/inputdata" \
+    -e CSVSERVER_BORDER=Orange \
+    infracloudio/csvserver:latest
+
+Get Shell Access to the Container
+
+docker exec -it csvserver /bin/sh
+
+Next step is we need to check whether the Application’s Listening Port
+netstat -tuln | grep 9300
+
+Re-run the Container to Make Sure It’s Accessible at http://localhost:9393
+
+Checked that it is accsessible via the port 9393 (I have screenshotted the image in the solution directory)
+
+
+curl -o ./part-1-output http://localhost:9393/raw
+
+After executing this command I can see the part-1 ouput file as mentioned below
+
+Y3N2c2VydmVyIGdlbmVyYXRlZCBhdDogMTcyOTkyMzAxNQ==
+CSVSERVER_BORDER: Orange
+2,  839
+3,  212
+4,  256
+5,  377
+6,  180
+7,  559
+8,  926
+
