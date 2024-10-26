@@ -1,8 +1,20 @@
-Steps need to be performed for part I Solutions :
+**Steps need to be performed for part I Solutions** :
 
 Created a New Repository named as sai_karthik_Assignmnet 
 
 In the Solution Directory 
+1.Run the container image infracloudio/csvserver:latest in background and check if it's running.
+
+To run the infracloudio/csvserver:latest container in the background and verify its status we need to use the following command:
+docker run -d --name csvserver infracloudio/csvserver:latest
+
+Then we need to Check if the container is running:
+
+docker ps | grep csvserver
+
+2.The container will be in **exited** status due to its inputfile is missing so then we need to move to next step to  create a **bash script** 
+
+3.Write a bash script gencsv.sh to generate a file named inputFile
 
 I have placed the inputfile script in file named gencsv.sh 
 We need to make sure the script is executable 
@@ -20,7 +32,7 @@ The inputfile is generated the values
 8, 753
 
 
-Steps need to be performed for part II Solutions :
+**Steps need to be performed for part II Solutions** :
 
 1. Delete Any Running Containers
 
@@ -49,7 +61,7 @@ To stop the Application
 docker-compose down
 
 
-Steps need to be performed for part III Solutions :
+**Steps need to be performed for part III Solutions** :
 
 1. Delete Any Running Containers
 
