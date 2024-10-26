@@ -20,3 +20,72 @@ The inputfile is generated the values
 8, 753
 
 
+Steps need to be performed for part II Solutions :
+
+1. Delete Any Running Containers
+
+docker stop csvserver
+docker rm csvserver
+
+2. Create the csvserver.env File
+We need to create a file named csvserver.env in our working directory to store the environment variables 
+
+CSVSERVER_BORDER=Orange
+
+3. Create the docker-compose.yaml File
+we need to create file named docker-compose.yaml in the same directory and the content is mentioned in the docker-compose.yaml file.
+
+
+4.Running the Application with Docker Compose
+we need to use the following command to run the Application
+
+docker-compose up
+
+5. Access the Application
+Once the application is running, you can access it at http://localhost:9393
+
+To stop the Application
+
+docker-compose down
+
+
+Steps need to be performed for part III Solutions :
+
+1. Delete Any Running Containers
+
+docker-compose down
+
+2. Update docker-compose.yaml
+We need to modify our existing docker-compose.yaml file to include the Prometheus service.
+As we have the updated version of docker-compose.yaml
+
+
+3. Create the Prometheus Configuration File
+we need to create file named prometheus.yml in our working directory with the following content:
+
+global:
+  scrape_interval: 15s  # Set the default scrape interval to 15 seconds
+
+scrape_configs:
+  - job_name: 'csvserver'
+    static_configs:
+      - targets: ['csvserver:9300']  # The application target
+
+
+4. Run Docker Compose
+We need to make sure to start the containers with the updated configuration:
+
+docker-compose up
+
+5. Access Prometheus
+Once everything is up and running, access Prometheus at http://localhost:9090.
+Attached the Screenshot od it named as Prometheus Query Metrics Graph
+
+
+6. Stopping the Application
+
+To stop all containers, you can run:
+
+docker-compose down
+
+
